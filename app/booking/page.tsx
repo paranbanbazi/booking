@@ -52,8 +52,10 @@ export default function BookingPage() {
       const { error } = await getSupabase().from("bookings").insert([form]);
       if (error) throw error;
       setStep(1);
-    } catch {
-      alert("예약 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : JSON.stringify(err);
+      console.error("예약 오류:", err);
+      alert("예약 오류: " + msg);
     } finally {
       setLoading(false);
     }
