@@ -151,7 +151,16 @@ export default function BookingPage() {
             type="tel"
             placeholder="010-0000-0000"
             value={form.phone}
-            onChange={(e) => setForm({ ...form, phone: e.target.value })}
+            onChange={(e) => {
+              const nums = e.target.value.replace(/[^0-9]/g, "").slice(0, 11);
+              let formatted = nums;
+              if (nums.length > 3 && nums.length <= 7) {
+                formatted = nums.slice(0, 3) + "-" + nums.slice(3);
+              } else if (nums.length > 7) {
+                formatted = nums.slice(0, 3) + "-" + nums.slice(3, 7) + "-" + nums.slice(7);
+              }
+              setForm({ ...form, phone: formatted });
+            }}
             style={styles.input}
           />
         </div>
