@@ -154,7 +154,7 @@ export default function BookingPage() {
             onChange={(e) => {
               const nums = e.target.value.replace(/[^0-9]/g, "").slice(0, 11);
               let formatted = nums;
-              if (nums.length > 3 && nums.length <= 7) {
+              if (nums.length >= 3 && nums.length <= 7) {
                 formatted = nums.slice(0, 3) + "-" + nums.slice(3);
               } else if (nums.length > 7) {
                 formatted = nums.slice(0, 3) + "-" + nums.slice(3, 7) + "-" + nums.slice(7);
